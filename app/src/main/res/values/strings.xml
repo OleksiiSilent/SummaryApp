@@ -1,0 +1,19 @@
+<resources>
+    <!--Application name-->
+    <string name="app_name">My Application</string>
+
+    <!--Main Text-->
+    <string name="link_currency_exchange" translatable="false">Розрахунок обміну валют</string>
+    <string name="link_exchange_ratio" translatable="false">Отримати курси валют</string>
+    <string name="link_tip_calculation">Розрахунок чайових</string>
+    <string name="link_general_info">Про застосунок</string>
+
+
+    <!-- Titles -->
+    <string name="main_page">Main page</string>
+    <string name="exchange_rate">Exchange Rate</string>
+    <string name="tip_calculator">Tip calculator</string>
+
+    <!-- Content descriptions -->
+    <string name="content_link_calculator">goto currency calculator</string>
+</resources>
