@@ -30,10 +30,11 @@ import java.util.List;
  */
 public class CurrencyListFragment extends Fragment {
     FragmentCurrencyListBinding binding;
-
+    DBHelper dbHelper;
     SQLiteDatabase db;
+    List<CurrencyRate> rates;
 
-    private static final String LOG_TAG = "DB:Rates";
+    private static final String LOG_TAG = "Db_logs";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,21 +81,22 @@ public class CurrencyListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false);
+        rates = getList();
         return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
-        DBHelper dbHelper = new DBHelper(binding.getRoot().getContext());
-        db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         ListView listView = binding.currencyList;
-        List<CurrencyRate> listTool = getList();
+        List<CurrencyRate> listTool = rates;
         CurrencyRateAdapter adapter = new CurrencyRateAdapter(view.getContext(), listTool);
         listView.setAdapter(adapter);
     }
 
     private List<CurrencyRate> getList(){
-        List<CurrencyRate> rates= new ArrayList<>();
+        dbHelper = new DBHelper(binding.getRoot().getContext());
+        db = dbHelper.getWritableDatabase();
+        rates= new ArrayList<>();
         Log.d(LOG_TAG, "------ Rows in currency_rate--------");
         Cursor c = db.query("currency_rate", null,null,null, null, null,null);
 
@@ -102,7 +104,7 @@ public class CurrencyListFragment extends Fragment {
             int currencyCodeLColIndex = c.getColumnIndex("currencyCodeL");
             int unitsColIndex = c.getColumnIndex(("units"));
             int amountColIndex = c.getColumnIndex(("amount"));
-
+            Log.d(LOG_TAG,"start read data from db: ");
             do {
                 rates.add(new CurrencyRate(
                         c.getString(currencyCodeLColIndex),

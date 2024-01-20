@@ -1,17 +1,28 @@
 package com.example.myapplication.CurrencyCalculator;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CurrencyRate {
-    private int id;
+    @JsonProperty("StartDate")
     private String startDate;
+    @JsonProperty("TimeSign")
+    private String timeSign;
+    @JsonProperty("CurrencyCode")
     private String currencyCode;
+    @JsonProperty("CurrencyCodeL")
     private String currencyCodeL;
+    @JsonProperty("Units")
     private int units;
+    @JsonProperty("Amount")
     private float amount;
 
     public CurrencyRate(String currencyCodeL, int units, float amount) {
         this.currencyCodeL = currencyCodeL;
         this.units = units;
         this.amount = amount;
+    }
+
+    public CurrencyRate() {
     }
 
     public String getStartDate() {
@@ -52,5 +63,13 @@ public class CurrencyRate {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public String getTimeSign() {
+        return timeSign;
+    }
+
+    public void setTimeSign(String timeSign) {
+        this.timeSign = timeSign;
     }
 }
