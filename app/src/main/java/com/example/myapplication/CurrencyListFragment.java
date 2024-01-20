@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +31,8 @@ import java.util.List;
  */
 public class CurrencyListFragment extends Fragment {
     FragmentCurrencyListBinding binding;
-    DBHelper dbHelper;
-    SQLiteDatabase db;
-    List<CurrencyRate> rates;
+    private ItemViewModel viewModel;
+    private ArrayList<CurrencyRate> rates;
 
     private static final String LOG_TAG = "Db_logs";
 
@@ -79,9 +79,9 @@ public class CurrencyListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentCurrencyListBinding.inflate(inflater, container, false);
-        rates = getList();
+        viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        rates = viewModel.getRates();
         return binding.getRoot();
     }
 
@@ -91,35 +91,5 @@ public class CurrencyListFragment extends Fragment {
         List<CurrencyRate> listTool = rates;
         CurrencyRateAdapter adapter = new CurrencyRateAdapter(view.getContext(), listTool);
         listView.setAdapter(adapter);
-    }
-
-    private List<CurrencyRate> getList(){
-        dbHelper = new DBHelper(binding.getRoot().getContext());
-        db = dbHelper.getWritableDatabase();
-        rates= new ArrayList<>();
-        Log.d(LOG_TAG, "------ Rows in currency_rate--------");
-        Cursor c = db.query("currency_rate", null,null,null, null, null,null);
-
-        if (c.moveToFirst()){
-            int currencyCodeLColIndex = c.getColumnIndex("currencyCodeL");
-            int unitsColIndex = c.getColumnIndex(("units"));
-            int amountColIndex = c.getColumnIndex(("amount"));
-            Log.d(LOG_TAG,"start read data from db: ");
-            do {
-                rates.add(new CurrencyRate(
-                        c.getString(currencyCodeLColIndex),
-                        c.getInt(unitsColIndex),
-                        c.getInt(amountColIndex)));
-                Log.d(LOG_TAG,"startDate: "
-                        + ", currencyCodeL: " + c.getInt(currencyCodeLColIndex)
-                        + ", units: " + c.getString(unitsColIndex)
-                        + ", amount" + c.getString((amountColIndex)));
-            } while (c.moveToNext());
-
-
-        }else{
-            Log.d(LOG_TAG, "0 rows");
-        }
-        return rates;
     }
 }
