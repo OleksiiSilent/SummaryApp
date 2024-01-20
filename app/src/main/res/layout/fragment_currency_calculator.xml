@@ -100,15 +100,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/target_ratio_sp" />
 
-        <Button
-            android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/back_button"
-            app:layout_constraintBottom_toBottomOf="@+id/caclExchange_btn"
-            app:layout_constraintEnd_toStartOf="@+id/caclExchange_btn"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.myapplication.databinding.FragmentTipCalculatorBinding;
 
@@ -65,5 +67,35 @@ public class TipCalculatorFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentTipCalculatorBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        EditText receiptValueTxt = binding.tipReceiptAmount;
+        EditText tipPercentTxt = binding.tipPercent;
+        TextView tipAmountTxt = binding.txtTipAmount;
+        TextView receiptAmountTxt = binding.receiptAmount;
+        EditText peopleNumberText = binding.peopleNumber;
+        TextView amountPerPersonTxt = binding.amountPerPerson;
+
+        binding.tipCalculateBtn.setOnClickListener(view1 -> {
+
+            Float receiptValue = Float.valueOf(receiptValueTxt.getText().toString());
+            Float tipPercent = Float.valueOf(tipPercentTxt.getText().toString()) / 100F;
+            Float tipAmount = receiptValue*tipPercent;
+            tipAmountTxt.setText(String.format("%.2f", tipAmount));
+            receiptAmountTxt.setText(String.format("%.2f", (receiptValue + tipAmount)));
+        });
+
+        binding.splitReceiptBtn.setOnClickListener(view1 -> {
+            float receiptAmount = Float.parseFloat(receiptAmountTxt.getText().toString());
+            int peopleNumber = Integer.parseInt(peopleNumberText.getText().toString());
+            float amountPerPerson = 0F;
+            boolean b = !(receiptAmount == 0f);
+            if (b) {
+                amountPerPerson = receiptAmount / peopleNumber;
+            }
+            amountPerPersonTxt.setText(String.format("%.2f", amountPerPerson));
+        });
     }
 }

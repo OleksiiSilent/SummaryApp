@@ -17,6 +17,7 @@
     <string name="split_total">Поділити чек</string>
     <string name="people_number">Кількість людей:</string>
     <string name="sum_for_one">Сума від кожного:</string>
+    <string name="initial_value_of_tip">15</string>
 
     <!-- Titles -->
     <string name="main_page">Main page</string>
@@ -37,5 +38,8 @@
     <string name="back_button">Повернутись</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="currency_code_str">Code</string>
+    <string name="currency_units_str">Units</string>
+    <string name="currency_amount_str">Amount</string>
 
 </resources>

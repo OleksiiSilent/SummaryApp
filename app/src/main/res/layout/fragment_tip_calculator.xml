@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TipCalculatorFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -70,12 +70,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <EditText
-            android:id="@+id/source_amount"
+            android:id="@+id/tip_receipt_amount"
             android:layout_width="134dp"
             android:layout_height="39dp"
             android:layout_marginTop="25dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:text="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
@@ -95,10 +95,10 @@
             android:layout_marginTop="22dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            android:text="0"
+            android:text="@string/initial_value_of_tip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/source_amount" />
+            app:layout_constraintTop_toBottomOf="@+id/tip_receipt_amount" />
 
         <TextView
             android:id="@+id/txt_tip_amount"
@@ -111,7 +111,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/receipt_amount"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="0"
@@ -129,7 +129,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
+            app:layout_constraintTop_toBottomOf="@+id/tip_calculate_btn" />
 
         <TextView
             android:id="@+id/textView15"
@@ -152,13 +152,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/tip_calculate_btn"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/calculate_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintHorizontal_bias="0.528"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -169,7 +169,7 @@
             android:layout_marginTop="30dp"
             android:ems="10"
             android:inputType="number"
-            android:text="0"
+            android:text="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -185,7 +185,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline8" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/split_receipt_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
@@ -194,16 +194,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-        <Button
-            android:id="@+id/back_tip_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="goToMainActivity"
-            android:text="@string/back_button"
-            app:layout_constraintBottom_toBottomOf="@+id/button2"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</ScrollView>
