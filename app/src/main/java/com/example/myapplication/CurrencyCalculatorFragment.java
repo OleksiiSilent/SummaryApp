@@ -4,67 +4,40 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.myapplication.CurrencyCalculator.Calculator;
+import com.example.myapplication.CurrencyCalculator.CurrencyRate;
 import com.example.myapplication.databinding.FragmentCurrencyCalculatorBinding;
 import com.example.myapplication.databinding.FragmentMainHostBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CurrencyCalculatorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class CurrencyCalculatorFragment extends Fragment {
-
     private FragmentCurrencyCalculatorBinding binding;
-    private Calculator calculator = new Calculator();
+    ArrayList<String> currencyCode;
+    private final Calculator calculator = new Calculator();
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public CurrencyCalculatorFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CurrencyCalculatorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CurrencyCalculatorFragment newInstance(String param1, String param2) {
-        CurrencyCalculatorFragment fragment = new CurrencyCalculatorFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -72,6 +45,19 @@ public class CurrencyCalculatorFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyCalculatorBinding.inflate(inflater, container, false);
+        ItemViewModel viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
+        ArrayList<CurrencyRate> rates = viewModel.getRates();
+        ArrayList<String> currencyCodes = new ArrayList<>();
+        rates.forEach(item -> currencyCodes.add(item.getCurrencyCodeL()));
+
+        Spinner sourceRatioSp = binding.sourceRatioSp;
+        Spinner targetRatioSp = binding.targetRatioSp;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                binding.getRoot().getContext(),
+                android.R.layout.simple_spinner_item,
+                currencyCodes);
+        sourceRatioSp.setAdapter(adapter);
+        targetRatioSp.setAdapter(adapter);
         return binding.getRoot();
     }
 
@@ -80,6 +66,8 @@ public class CurrencyCalculatorFragment extends Fragment {
         calculateBtn.setOnClickListener(view1 -> {
             EditText currencyValueText = binding.sourceRatioValue;
             TextView resultText = binding.resultText;
+            Spinner sourceCurrency = binding.sourceRatioSp;
+            Spinner targetCurrency = binding.targetRatioSp;
 
             Integer currencyValue = Integer.getInteger(currencyValueText.getText().toString());
             calculator.setValue_to_exchange(currencyValue);
