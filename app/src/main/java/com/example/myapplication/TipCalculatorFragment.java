@@ -9,15 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myapplication.databinding.FragmentCurrencyListBinding;
+import com.example.myapplication.databinding.FragmentTipCalculatorBinding;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CurrencyListFragment#newInstance} factory method to
+ * Use the {@link TipCalculatorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CurrencyListFragment extends Fragment {
-    FragmentCurrencyListBinding binding;
+public class TipCalculatorFragment extends Fragment {
+    private FragmentTipCalculatorBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ public class CurrencyListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CurrencyListFragment() {
+    public TipCalculatorFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +38,11 @@ public class CurrencyListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CurrencyListFragment.
+     * @return A new instance of fragment TipCalculatorFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CurrencyListFragment newInstance(String param1, String param2) {
-        CurrencyListFragment fragment = new CurrencyListFragment();
+    public static TipCalculatorFragment newInstance(String param1, String param2) {
+        TipCalculatorFragment fragment = new TipCalculatorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,7 +63,7 @@ public class CurrencyListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentCurrencyListBinding.inflate(inflater, container, false);
+        binding = FragmentTipCalculatorBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 }

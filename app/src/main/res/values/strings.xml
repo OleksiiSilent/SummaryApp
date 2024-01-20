@@ -35,5 +35,7 @@
     <string name="info_total">Курсова робота виконана студентом групи ЗПІ-зп13</string>
 
     <string name="back_button">Повернутись</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

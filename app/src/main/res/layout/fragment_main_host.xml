@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <ImageButton
-            android:id="@+id/tip_calculator"
+            android:id="@+id/tip_calculator_btn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
@@ -129,7 +129,7 @@
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <ImageButton
-            android:id="@+id/about"
+            android:id="@+id/about_btn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"

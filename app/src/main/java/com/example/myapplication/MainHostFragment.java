@@ -2,11 +2,16 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.example.myapplication.databinding.FragmentMainHostBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,7 +19,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MainHostFragment extends Fragment {
-
+    private FragmentMainHostBinding binding;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -56,9 +61,34 @@ public class MainHostFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_host, container, false);
+        //return inflater.inflate(R.layout.fragment_main_host, container, false);
+        binding = FragmentMainHostBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.currencyCalcBtn.setOnClickListener(view1 -> NavHostFragment
+                .findNavController(MainHostFragment.this)
+                .navigate(R.id.currencyCalculatorFragment));
+
+
+        binding.currencyListBtn.setOnClickListener((view1 -> NavHostFragment
+                .findNavController(MainHostFragment.this)
+                .navigate((R.id.currencyListFragment))));
+
+        binding.tipCalculatorBtn.setOnClickListener((view1 -> NavHostFragment
+                .findNavController(MainHostFragment.this)
+                .navigate(R.id.tipCalculatorFragment)));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

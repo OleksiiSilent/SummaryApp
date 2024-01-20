@@ -11,13 +11,40 @@
         android:label="Main page"
         tools:layout="@layout/fragment_main_host" >
         <action
-            android:id="@+id/action_MainHostFragment_pop"
-            app:popUpTo="@id/MainHostFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_MainHostFragment_to_currencyCalculatorFragment"
+            app:destination="@id/currencyCalculatorFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_currencyListFragment"
+            app:destination="@id/currencyListFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_tipCalculatorFragment"
+            app:destination="@id/tipCalculatorFragment" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.myapplication.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/currencyCalculatorFragment"
+        android:name="com.example.myapplication.CurrencyCalculatorFragment"
+        android:label="fragment_currency_calculator"
+        tools:layout="@layout/fragment_currency_calculator" >
+        <action
+            android:id="@+id/action_currencyCalculatorFragment_pop"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyListFragment"
+        android:name="com.example.myapplication.CurrencyListFragment"
+        android:label="fragment_currency_list"
+        tools:layout="@layout/fragment_currency_list" >
+        <action
+            android:id="@+id/action_currencyListFragment_pop"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tipCalculatorFragment"
+        android:name="com.example.myapplication.TipCalculatorFragment"
+        android:label="fragment_tip_calculator"
+        tools:layout="@layout/fragment_tip_calculator" >
+        <action
+            android:id="@+id/action_tipCalculatorFragment_to_MainHostFragment"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
 </navigation>
