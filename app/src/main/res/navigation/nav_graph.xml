@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MainHostFragment">
+
+    <fragment
+        android:id="@+id/MainHostFragment"
+        android:name="com.example.myapplication.MainHostFragment"
+        android:label="Main page"
+        tools:layout="@layout/fragment_main_host" >
+        <action
+            android:id="@+id/action_MainHostFragment_to_currencyCalculatorFragment"
+            app:destination="@id/currencyCalculatorFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_currencyListFragment"
+            app:destination="@id/currencyListFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_tipCalculatorFragment"
+            app:destination="@id/tipCalculatorFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_blankFragment"
+            app:destination="@id/infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyCalculatorFragment"
+        android:name="com.example.myapplication.CurrencyCalculatorFragment"
+        android:label="fragment_currency_calculator"
+        tools:layout="@layout/fragment_currency_calculator" >
+        <action
+            android:id="@+id/action_currencyCalculatorFragment_pop"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyListFragment"
+        android:name="com.example.myapplication.CurrencyListFragment"
+        android:label="fragment_currency_list"
+        tools:layout="@layout/fragment_currency_list" >
+        <action
+            android:id="@+id/action_currencyListFragment_pop"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tipCalculatorFragment"
+        android:name="com.example.myapplication.TipCalculatorFragment"
+        android:label="fragment_tip_calculator"
+        tools:layout="@layout/fragment_tip_calculator" >
+        <action
+            android:id="@+id/action_tipCalculatorFragment_to_MainHostFragment"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.myapplication.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_blankFragment_to_MainHostFragment"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+</navigation>
