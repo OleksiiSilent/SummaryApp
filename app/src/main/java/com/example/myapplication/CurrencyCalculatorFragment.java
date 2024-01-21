@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +22,14 @@ import com.example.myapplication.databinding.FragmentCurrencyCalculatorBinding;
 import com.example.myapplication.databinding.FragmentMainHostBinding;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
 
 public class CurrencyCalculatorFragment extends Fragment {
     private FragmentCurrencyCalculatorBinding binding;
     ArrayList<String> currencyCode;
-    private final Calculator calculator = new Calculator();
-
-
+    ArrayList<CurrencyRate> rates;
 
     public CurrencyCalculatorFragment() {
         // Required empty public constructor
@@ -46,12 +48,13 @@ public class CurrencyCalculatorFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCurrencyCalculatorBinding.inflate(inflater, container, false);
         ItemViewModel viewModel = new ViewModelProvider(requireActivity()).get(ItemViewModel.class);
-        ArrayList<CurrencyRate> rates = viewModel.getRates();
+        rates = viewModel.getRates();
         ArrayList<String> currencyCodes = new ArrayList<>();
         rates.forEach(item -> currencyCodes.add(item.getCurrencyCodeL()));
 
         Spinner sourceRatioSp = binding.sourceRatioSp;
         Spinner targetRatioSp = binding.targetRatioSp;
+        Collections.sort(currencyCodes);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 binding.getRoot().getContext(),
                 android.R.layout.simple_spinner_item,
@@ -63,15 +66,30 @@ public class CurrencyCalculatorFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
         Button calculateBtn = binding.caclExchangeBtn;
-        calculateBtn.setOnClickListener(view1 -> {
-            EditText currencyValueText = binding.sourceRatioValue;
-            TextView resultText = binding.resultText;
-            Spinner sourceCurrency = binding.sourceRatioSp;
-            Spinner targetCurrency = binding.targetRatioSp;
+        EditText currencyValTxt = binding.sourceRatioValue;
+        Spinner sourceCurrency = binding.sourceRatioSp;
+        Spinner targetCurrency = binding.targetRatioSp;
 
-            Integer currencyValue = Integer.getInteger(currencyValueText.getText().toString());
-            calculator.setValue_to_exchange(currencyValue);
-            Float result = calculator.calculate();
+        calculateBtn.setOnClickListener(view1 -> {
+
+            TextView resultText = binding.resultText;
+            float amount_to_exchange = Float.parseFloat(currencyValTxt.getText().toString());
+            String sourceCurrencyCodeL = sourceCurrency.getSelectedItem().toString();
+            String targetCurrencyCodeL = targetCurrency.getSelectedItem().toString();
+            Log.d("calculate", "amount: " + amount_to_exchange
+                        + ", sourceCodeL: " + sourceCurrencyCodeL + ", targetCodeL: " + targetCurrencyCodeL);
+
+            CurrencyRate source = rates.stream()
+                    .filter(item -> Objects.equals(item.getCurrencyCodeL(), sourceCurrencyCodeL))
+                    .findFirst()
+                    .get();
+
+            CurrencyRate target = rates.stream()
+                    .filter(item -> Objects.equals(item.getCurrencyCodeL(), targetCurrencyCodeL))
+                    .findFirst()
+                    .get();
+
+            Float result = source.convertUnitTo(target) * amount_to_exchange;
 
             resultText.setText(String.valueOf(result));
         });

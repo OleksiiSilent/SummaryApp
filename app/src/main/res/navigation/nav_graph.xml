@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_MainHostFragment_to_tipCalculatorFragment"
             app:destination="@id/tipCalculatorFragment" />
+        <action
+            android:id="@+id/action_MainHostFragment_to_blankFragment"
+            app:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/currencyCalculatorFragment"
@@ -45,6 +48,15 @@
         tools:layout="@layout/fragment_tip_calculator" >
         <action
             android:id="@+id/action_tipCalculatorFragment_to_MainHostFragment"
+            app:destination="@id/MainHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.example.myapplication.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" >
+        <action
+            android:id="@+id/action_blankFragment_to_MainHostFragment"
             app:destination="@id/MainHostFragment" />
     </fragment>
 </navigation>

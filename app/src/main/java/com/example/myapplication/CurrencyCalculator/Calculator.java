@@ -1,22 +1,19 @@
 package com.example.myapplication.CurrencyCalculator;
 
 public class Calculator {
-    private float rate = 0F;
-    private int value_to_exchange = 0;
 
-    public float getRate() {
-        return rate;
-    }
+    public static float calculate(
+            float value_to_exchange,
+            CurrencyRate source_currency,
+            CurrencyRate target_currency){
+        int source_unit = source_currency.getUnits();
+        float target_unit = target_currency.getUnits();
+        float target_amount = target_currency.getAmount();
+        float source_amount = source_currency.getAmount();
 
-    private void setRate(float rate) {
-        this.rate = rate;
-    }
 
-    public void setValue_to_exchange(int value_to_exchange) {
-        this.value_to_exchange = value_to_exchange;
-    }
-
-    public float calculate(){
-        return value_to_exchange * rate;
+        return value_to_exchange * (
+                (source_currency.getAmount() / source_unit)
+                        * (target_amount / target_unit));
     }
 }

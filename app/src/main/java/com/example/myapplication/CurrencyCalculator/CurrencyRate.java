@@ -72,4 +72,10 @@ public class CurrencyRate {
     public void setTimeSign(String timeSign) {
         this.timeSign = timeSign;
     }
+
+    public float convertUnitTo(CurrencyRate other){
+        float other_value_per_unit = other.getAmount() / other.getUnits();
+        float this_value_per_unit = this.getAmount() / this.getUnits();
+        return this_value_per_unit / other_value_per_unit;
+    }
 }

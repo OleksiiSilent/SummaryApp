@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "app_logs";
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    private final Calculator calculator = new Calculator();
     private ArrayList<CurrencyRate> rates;
 
     @Override

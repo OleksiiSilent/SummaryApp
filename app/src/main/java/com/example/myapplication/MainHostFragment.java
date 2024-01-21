@@ -9,62 +9,25 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.myapplication.databinding.FragmentMainHostBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MainHostFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MainHostFragment extends Fragment {
     private FragmentMainHostBinding binding;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public MainHostFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainHostFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MainHostFragment newInstance(String param1, String param2) {
-        MainHostFragment fragment = new MainHostFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_main_host, container, false);
         binding = FragmentMainHostBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -76,7 +39,6 @@ public class MainHostFragment extends Fragment {
                 .findNavController(MainHostFragment.this)
                 .navigate(R.id.currencyCalculatorFragment));
 
-
         binding.currencyListBtn.setOnClickListener((view1 -> NavHostFragment
                 .findNavController(MainHostFragment.this)
                 .navigate((R.id.currencyListFragment))));
@@ -84,6 +46,10 @@ public class MainHostFragment extends Fragment {
         binding.tipCalculatorBtn.setOnClickListener((view1 -> NavHostFragment
                 .findNavController(MainHostFragment.this)
                 .navigate(R.id.tipCalculatorFragment)));
+
+        binding.aboutBtn.setOnClickListener(view1 -> NavHostFragment
+                .findNavController(MainHostFragment.this)
+                .navigate(R.id.infoFragment));
     }
 
     @Override
